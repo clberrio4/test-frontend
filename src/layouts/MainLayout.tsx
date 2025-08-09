@@ -22,7 +22,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                     </h1>
                     <nav className="flex gap-6">
                         {navLinks.map((link) => (
-                            <h3 className="text-xl font-bold text-blue-600"> <Link
+                            <h3  key={link.path} className="text-xl font-bold text-blue-600"> <Link
                                 key={link.path}
                                 to={link.path}
                                 className={`text-sm font-medium transition ${location.pathname === link.path
