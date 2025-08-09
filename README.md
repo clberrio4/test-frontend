@@ -1,69 +1,30 @@
-# React + TypeScript + Vite
+# 🚀 Proyecto Vite + React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto está desarrollado con [Vite](https://vitejs.dev/) y [React](https://react.dev/).  
+Se ejecuta localmente con unos pocos pasos y se despliega automáticamente en **AWS Amplify**. al hacer commit en master
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 Requisitos previos
 
-## Expanding the ESLint configuration
+Antes de comenzar, asegúrate de tener instalado:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [Node.js](https://nodejs.org/) (versión recomendada: **v22.x** o superior)
+- [npm](https://www.npmjs.com/) (viene incluido con Node.js)
+- Una cuenta en [AWS Amplify](https://aws.amazon.com/amplify/) para despliegue
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🔧 Instalación y ejecución en local
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Clona el repositorio**
+   ```bash
+   git clone https://github.com/clberrio4/test-frontend
+   cd test-frontend
+2. **Configura las variables de entorno**
+    ```bash
+    Crea en la raíz del proyecto un archivo .env con la siguiente variable, apuntando a tu backend
+    VITE_API_URL=https://www.example.com
+3. **instalar dependecias y correr **
+   ```bash
+   npm install && npm run dev
