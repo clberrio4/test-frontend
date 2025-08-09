@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Amplify (auto-deploy) - dominio por defecto
+
+Parameters:
+  AppName:
+    Type: String
+    Default: my-frontend
+  Repository:
+    Type: String
+    Description: "URL del repo"
+  BranchName:
+    Type: String
+    Default: main
+  GitHubAccessToken:
+    Type: String
+    NoEcho: true
+    Description: "Accestoken cone stos permisos public_repo, repo_deployment, repo:invite, security_events"
+  ViteApiUrl:
+    Type: String
+    Default: ""
+    Description: "VITE_API_URL"
+
+Resources:
+  AmplifyApp:
+    Type: AWS::Amplify::App
+    Properties:
+      Name: !Ref AppName
+      Repository: !Ref Repository
+      AccessToken: !Ref GitHubAccessToken
+      Platform: WEB
+      BuildSpec: |
+        version: 1
+        frontend:
+          phases:
+            preBuild:
+              commands:
+                - nvm install 20
+                - nvm use 20
+                - npm ci
+            build:
+              commands:
+                - npm run build
+          artifacts:
+            baseDirectory: dist
+            files:
+              - '**/*'
+          cache:
+            paths:
+              - node_modules/**/*
+          customHeaders:
+            - pattern: '**/*'
+              headers:
+                - key: Cache-Control
+                  value: max-age=31536000
+          redirects:
+            - source: </^[^.]+$|\\.(?!(css|gif|ico|jpg|jpeg|js|png|svg|txt|woff|woff2)$)([^.]+)$/>
+              target: /index.html
+              status: 200
+      EnvironmentVariables:
+        - Name: VITE_API_URL
+          Value: !Ref ViteApiUrl
+
+  AmplifyBranch:
+    Type: AWS::Amplify::Branch
+    Properties:
+      AppId: !GetAtt AmplifyApp.AppId
+      BranchName: !Ref BranchName
+      EnableAutoBuild: true
+      Stage: PRODUCTION
+
+Outputs:
+  AppId:
+    Description: Amplify AppId
+    Value: !GetAtt AmplifyApp.AppId
+  AmplifyDefaultDomain:
+    Description: Dominio por defecto de Amplify (p.ej. xxxxxx.amplifyapp.com)
+    Value: !GetAtt AmplifyApp.DefaultDomain
+  BranchUrl:
+    Description: URL de la rama desplegada
+    Value: !Sub "https://${BranchName}.${AmplifyApp.DefaultDomain}"

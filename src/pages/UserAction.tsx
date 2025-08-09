@@ -143,9 +143,6 @@ export default function UserActionPage() {
                         const isSubscribed = subscribedIds.includes(fund.id);
                         const insufficient = fund.minAmount > balance;
                         const transactionId = transactionMap[fund.id];
-
-                        console.log({ fund });
-
                         return (
                             <div
                                 key={`${fund.id}-${isSubscribed ? 'subscribed' : 'available'}`}
