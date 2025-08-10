@@ -1,0 +1,24 @@
+[
+  {
+    "ParameterKey": "AppName",
+    "ParameterValue": "App fondo de pensiones"
+  },
+  {
+    "ParameterKey": "Repository",
+    "ParameterValue": "https://github.com/clberrio4/test-frontend"
+  },
+  {
+    "ParameterKey": "BranchName",
+    "ParameterValue": "master"
+  },
+  {
+    "ParameterKey": "GitHubAccessToken",
+    "ParameterValue": "ghp_qZXCGjpk6JfzRWv721Fg..."
+  },
+  {
+    "ParameterKey": "ViteApiUrl",
+    "ParameterValue": "https://api.midominio.com"
+  }
+]
+
+
